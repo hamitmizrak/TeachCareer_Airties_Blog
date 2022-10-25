@@ -5,7 +5,7 @@
 # endspoint
 
 # 
-* [GitHub](https://github.com/hamitmizrak/)
+* [GitHub](https://github.com/hamitmizrak/TeachCareer_Airties_Blog)
 * 
 ### Gereksinimler
 Java 18
