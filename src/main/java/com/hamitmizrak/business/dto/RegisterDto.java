@@ -27,7 +27,7 @@ public class RegisterDto implements Serializable {
 
     @NotEmpty(message = "{blog.email.validation.constraints.NotNull.message}")
     @Email(message = "{blog.email.regex.validation.constraints.NotNull.message}")
-    //@UserRegisterUniqueEmail
+    @UserRegisterUniqueEmail
     private String email;
 
     @NotEmpty(message = "{blog.password.validation.constraints.NotNull.message}")
