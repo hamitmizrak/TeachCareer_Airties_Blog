@@ -2,7 +2,19 @@
 
 ![readme](./picture/readme.jpg)
 
-# endspoint
+## endspoint
+
+## SpringMVC
+```shell
+Validation
+i18n
+Annotation
+Dto
+@Controller
+@GetMapping
+@PostMapping
+fileWriter
+```
 
 # 
 * [GitHub](https://github.com/hamitmizrak/TeachCareer_Airties_Blog)

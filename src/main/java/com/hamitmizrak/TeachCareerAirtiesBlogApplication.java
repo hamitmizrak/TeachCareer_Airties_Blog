@@ -45,9 +45,9 @@ import java.util.TimeZone;
 //@SpringBootApplication
 public class TeachCareerAirtiesBlogApplication {
 
-      /*  @Async
+    /*
+    @Async
     public void dataSupport(){
-
     }*/
 
     @PostConstruct
@@ -65,5 +65,4 @@ public class TeachCareerAirtiesBlogApplication {
         //PSVM
         SpringApplication.run(TeachCareerAirtiesBlogApplication.class, args);
     }
-
 }
