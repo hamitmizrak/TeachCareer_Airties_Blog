@@ -27,7 +27,7 @@ public class RegisterController {
     public String validationPostRegister(@Valid @ModelAttribute("key_register") RegisterDto registerDto,
             BindingResult bindingResult, Model model){
         if(bindingResult.hasErrors()){
-            log.error("HATA: "+bindingResult.hasErrors());
+            log.error("HATA: "+bindingResult);
             return "register";
         }
         //eğer valiadtion bir hata yoksa
