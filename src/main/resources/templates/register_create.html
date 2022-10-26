@@ -43,11 +43,11 @@ private String surname;
 private String email;
 private String password;-->
     <!-- start codes -->
-    <h1 class="text-primary">Register</h1>
+    <h1 class="text-primary">Register Create</h1>
     <div class="container">
         <div class="row">
             <h1 class="text-uppercase mt-5 mb-3">Üye Kayıt</h1>
-            <form th:action="@{/validation/register}" th:object="${key_register}" method="post">
+            <form th:action="@{/register/create}" th:object="${key_register}" method="post">
                 <div class="col-md col-sm">
                     <div class="form-group mb-4">
                         <input type="text" class="form-control" placeholder="Adınız" id="name" name="name" autofocus="true" th:field="*{name}"/>

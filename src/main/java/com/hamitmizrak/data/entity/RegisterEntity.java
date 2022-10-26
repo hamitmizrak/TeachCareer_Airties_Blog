@@ -20,6 +20,8 @@ import java.util.Date;
 @Table(name = "register")
 public class RegisterEntity extends BaseEntity implements Serializable {
 public static final long serialVersionUID=1L;
+
+   //field
     private String name;
     private String surname;
 

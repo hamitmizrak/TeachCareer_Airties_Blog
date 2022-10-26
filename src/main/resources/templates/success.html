@@ -38,8 +38,9 @@
 <body class="container">
 
     <!-- start codes -->
-    <h1 class="text-primary">Kaydınız Başarılı </h1>
-    <a th:href="@{/}" class="btn btn-primary">Register Page</a>
+    <h1 th:text="${register_success}" class="text-primary"></h1>
+    <a th:href="@{/register/list}" class="btn btn-primary">Register List</a>
+    <a th:href="@{/register/create}" class="btn btn-primary">Register Create</a>
 
     <!-- ends codes -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>

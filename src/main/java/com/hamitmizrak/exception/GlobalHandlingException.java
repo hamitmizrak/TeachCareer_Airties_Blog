@@ -11,9 +11,11 @@ public class GlobalHandlingException {
     public String handlingNotFoundException(){
         return "Böyle bir data yoktur.";
     }
+
+
     //null değer olduğunda sporing yakalayacak
-    /*@ExceptionHandler({NullPointerException.class})
+    @ExceptionHandler({NullPointerException.class})
     public String handlingNullPointerException(){
         return "null değer girildi";
-    }*/
+    }
 }

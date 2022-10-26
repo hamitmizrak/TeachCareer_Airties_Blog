@@ -3,6 +3,7 @@ package com.hamitmizrak;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import javax.annotation.PostConstruct;
 import java.util.TimeZone;
@@ -20,9 +21,6 @@ import java.util.TimeZone;
 //Spring Boot Cache mekanizmasını aktif ediyorum
 //@EnableCaching
 
-//Auditor
-//@EnableJpaAuditing(auditorAwareRef = "auditorAwareMethod")
-
 //spring boot cache aktif ediyorum
 //redis: caching sağlamak
 //@EnableCaching
@@ -32,8 +30,10 @@ import java.util.TimeZone;
 
 //React
 //GraphQL: Gereksiz API taşınmasını engeller API: username,password,data,special,longTime,
-
 //Jackson: JSON
+
+//Auditor
+@EnableJpaAuditing(auditorAwareRef = "auditorAwareMethod")
 
 //exclude:dahil etmemek
 @SpringBootApplication(exclude = {

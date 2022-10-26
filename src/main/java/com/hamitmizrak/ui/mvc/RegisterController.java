@@ -24,19 +24,37 @@ import java.util.UUID;
 
 //Controller
 @Controller
-@RequestMapping("/controller")
+//@RequestMapping("/controller")
 public class RegisterController {
     //thymeleaf CRUD
     //@Service
     //postman
 
     //Inject
-    private final ModelMapperBean modelMapperBean;
     private final IRegisterRepository repository;
+    private final ModelMapperBean modelMapperBean;
     private final PasswordEncoderBean passwordEncoderBean;
 
-    //CREATE 2497-2588
-    // http://localhost:8080/controller/register/create
+    // SPEED DATA
+    // http://localhost:8080/speedData
+    @GetMapping("/speedData")
+    public String createSpeedData(Model model) {
+        int counter = 0;
+        for (int i = 1; i <= 5; i++) {
+            UUID uuid = UUID.randomUUID();
+            RegisterEntity registerEntity = RegisterEntity.builder()
+                    .name("adı " + i)
+                    .surname("soyadı " + i)
+                    .password("root").email(uuid.toString().concat("@gmail.com")).build();
+            repository.save(registerEntity);
+            counter++;
+        }
+        model.addAttribute("key_dataset", counter + " tane Register Entity oluşturuldu");
+        return "register_list";
+    }
+
+    // CREATE 2497-2588
+    // http://localhost:8080/register/create
     @GetMapping("/register/create")
     public String validationGetRegister(Model model) {
         model.addAttribute("key_register", new RegisterDto());
@@ -44,10 +62,9 @@ public class RegisterController {
     }
 
     //CREATE
-    // http://localhost:8080/controller/register/create
+    // http://localhost:8080/register/create
     @PostMapping("/register/create")
-    public String validationPostRegister(@Valid @ModelAttribute("key_register") RegisterDto registerDto,
-                                         BindingResult bindingResult, Model model) {
+    public String validationPostRegister(@Valid @ModelAttribute("key_register") RegisterDto registerDto,BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             log.error("HATA: " + bindingResult);
             return "register_create";
@@ -59,6 +76,7 @@ public class RegisterController {
         //Database
         //masking password
         registerDto.setPassword(passwordEncoderBean.passwordEncoderMethod().encode(registerDto.getPassword()));
+
         //model mapper
         RegisterEntity registerEntity = modelMapperBean.modelMapperMethod().map(registerDto, RegisterEntity.class);
         //model mapper yerine biz yazarsak
@@ -79,26 +97,9 @@ public class RegisterController {
         return "success";
     }
 
-    // SPEED DATA
-    // http://localhost:8080/controller/speedData
-    @GetMapping("/speedData")
-    public String createSpeedData(Model model) {
-        int counter = 0;
-        for (int i = 1; i <= 5; i++) {
-            UUID uuid = UUID.randomUUID();
-            RegisterEntity registerEntity = RegisterEntity.builder()
-                    .name("adı " + i)
-                    .surname("soyadı " + i)
-                    .password("root").email(uuid.toString().concat("@gmail.com")).build();
-            repository.save(registerEntity);
-            counter++;
-        }
-        model.addAttribute("key_dataset", counter + " tane Register Entity oluşturuldu");
-        return "register_list";
-    }
 
     // LIST
-    // http://localhost:8080/controller/register/list
+    // http://localhost:8080/register/list
     @GetMapping("/register/list")
     public String registerList(Model model) {
         List<RegisterEntity> list = repository.findAll();
@@ -110,8 +111,8 @@ public class RegisterController {
     }
 
     // FIND
-    // http://localhost:8080/controller/register/find
-    // http://localhost:8080/controller/register/find/1
+    // http://localhost:8080/register/find
+    // http://localhost:8080/register/find/1
     @GetMapping({"/register/find", "/register/find/{id}"})
     public String registerFindById(@PathVariable(name = "id", required = false) Long id, Model model) {
         //1.YOL
@@ -129,9 +130,9 @@ public class RegisterController {
     }
 
     // DELETE
-    // http://localhost:8080/controller/register/delete
-    // http://localhost:8080/controller/register/delete/1
-    @DeleteMapping({"/register/delete", "/register/delete/{id}"})
+    // http://localhost:8080/register/delete
+    // http://localhost:8080/register/delete/1
+    @GetMapping({"/register/delete", "/register/delete/{id}"})
     public String registerDeleteById(@PathVariable(name = "id", required = false) Long id, Model model) {
         RegisterEntity registerEntity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id + " nolu kayıt yoktur"));
         if (registerEntity != null) {
@@ -143,7 +144,7 @@ public class RegisterController {
     }
 
     //UPDATE
-    // http://localhost:8080/controller/update/register
+    // http://localhost:8080/update/register
     @GetMapping("/update/register/{id}")
     public String validationGetRegister(@PathVariable(name = "id") Long id, Model model) {
         RegisterEntity registerEntityFind = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id + " nolu kayıt yoktur"));
@@ -155,7 +156,7 @@ public class RegisterController {
     }
 
     //UPDATE
-    // http://localhost:8080/controller/update/register
+    // http://localhost:8080/update/register
     @PostMapping("/update/register/{id}")
     public String validationPostRegister(@PathVariable(name = "id") Long id, @Valid @ModelAttribute("key_update") RegisterDto registerDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
