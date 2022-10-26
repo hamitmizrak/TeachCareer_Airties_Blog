@@ -25,7 +25,7 @@ import java.util.UUID;
 //Controller
 @Controller
 //@RequestMapping("/controller")
-public class RegisterController {
+public class RegisterController  implements  IRegisterControler{
     //thymeleaf CRUD
     //@Service
     //postman
@@ -35,8 +35,10 @@ public class RegisterController {
     private final ModelMapperBean modelMapperBean;
     private final PasswordEncoderBean passwordEncoderBean;
 
+
     // SPEED DATA
     // http://localhost:8080/speedData
+    @Override
     @GetMapping("/speedData")
     public String createSpeedData(Model model) {
         int counter = 0;
@@ -55,6 +57,7 @@ public class RegisterController {
 
     // CREATE 2497-2588
     // http://localhost:8080/register/create
+    @Override
     @GetMapping("/register/create")
     public String validationGetRegister(Model model) {
         model.addAttribute("key_register", new RegisterDto());
@@ -63,6 +66,7 @@ public class RegisterController {
 
     //CREATE
     // http://localhost:8080/register/create
+    @Override
     @PostMapping("/register/create")
     public String validationPostRegister(@Valid @ModelAttribute("key_register") RegisterDto registerDto,BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
@@ -101,6 +105,7 @@ public class RegisterController {
     // LIST
     // http://localhost:8080/register/list
     @GetMapping("/register/list")
+    @Override
     public String registerList(Model model) {
         List<RegisterEntity> list = repository.findAll();
         model.addAttribute("register_list", list);
@@ -114,6 +119,7 @@ public class RegisterController {
     // http://localhost:8080/register/find
     // http://localhost:8080/register/find/1
     @GetMapping( "/register/find/{id}")
+    @Override
     public String registerFindById(@PathVariable(name = "id") Long id, Model model) {
         //1.YOL
         /*Optional<RegisterEntity> findData = repository.findById(id);
@@ -133,6 +139,7 @@ public class RegisterController {
     // http://localhost:8080/register/delete
     // http://localhost:8080/register/delete/1
     @GetMapping({"/register/delete", "/register/delete/{id}"})
+    @Override
     public String registerDeleteById(@PathVariable(name = "id", required = false) Long id, Model model) {
         RegisterEntity registerEntity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id + " nolu kayıt yoktur"));
         if (registerEntity != null) {
@@ -146,6 +153,7 @@ public class RegisterController {
     //UPDATE
     // http://localhost:8080/update/register
     @GetMapping("/register/update/{id}")
+    @Override
     public String updateGetRegister(@PathVariable(name = "id") Long id, Model model) {
         RegisterEntity registerEntityFind = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id + " nolu kayıt yoktur"));
         if (registerEntityFind != null) {
@@ -158,6 +166,7 @@ public class RegisterController {
     //UPDATE
     // http://localhost:8080/update/register
     @PostMapping("/register/update/{id}")
+    @Override
     public String updatePostRegister(@PathVariable(name = "id") Long id, @Valid @ModelAttribute("key_update") RegisterDto registerDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             log.error("HATA: " + bindingResult);
