@@ -75,8 +75,7 @@ public class RegisterServicesImpl implements IRegisterServices {
             return "register_create";
         }
         //eğer valiadtion bir hata yoksa
-        model.addAttribute("register_success", "Üye Kaydı Başarılı " + registerDto);
-        log.info("Başarılı " + registerDto);
+       log.info("Başarılı " + registerDto);
 
         //Database
         //masking password
@@ -99,7 +98,7 @@ public class RegisterServicesImpl implements IRegisterServices {
             e.printStackTrace();
         }
         //File
-        return "success";
+       return "redirect:/register/list";
     }
 
 

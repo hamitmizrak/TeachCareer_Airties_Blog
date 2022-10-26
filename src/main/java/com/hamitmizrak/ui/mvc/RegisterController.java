@@ -14,8 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
-import java.util.List;
-import java.util.UUID;
 
 //lombok
 @RequiredArgsConstructor
@@ -25,9 +23,6 @@ import java.util.UUID;
 @Controller
 //@RequestMapping("/controller")
 public class RegisterController implements IRegisterController {
-    //thymeleaf CRUD
-    //@Service
-    //postman
 
     //Inject
     private final IRegisterServices services;
@@ -56,20 +51,20 @@ public class RegisterController implements IRegisterController {
     @PostMapping("/register/create")
     public String validationPostRegister(RegisterDto registerDto,BindingResult bindingResult, Model model) {
         services.validationPostRegister( registerDto, bindingResult, model);
-        return "success";
+        model.addAttribute("register_success", "Üye Kaydı Başarılı " + registerDto.getId());
+        return "redirect:/register/list";
     }
 
     // LIST
     // http://localhost:8080/register/list
-    @GetMapping("/register/list")
     @Override
+    @GetMapping("/register/list")
     public String registerList(Model model) {
        services.registerList(model);
         return "register_list";
     }
 
     // FIND
-    // http://localhost:8080/register/find
     // http://localhost:8080/register/find/1
     @GetMapping( "/register/find/{id}")
     @Override
@@ -79,7 +74,6 @@ public class RegisterController implements IRegisterController {
     }
 
     // DELETE
-    // http://localhost:8080/register/delete
     // http://localhost:8080/register/delete/1
     @GetMapping({"/register/delete", "/register/delete/{id}"})
     @Override
@@ -88,7 +82,7 @@ public class RegisterController implements IRegisterController {
         return "redirect:/register/list";
     }
 
-    //UPDATE
+    // UPDATE
     // http://localhost:8080/update/register
     @GetMapping("/register/update/{id}")
     @Override
