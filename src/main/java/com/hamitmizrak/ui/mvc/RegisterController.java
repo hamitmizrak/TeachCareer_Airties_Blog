@@ -113,8 +113,8 @@ public class RegisterController {
     // FIND
     // http://localhost:8080/register/find
     // http://localhost:8080/register/find/1
-    @GetMapping({"/register/find", "/register/find/{id}"})
-    public String registerFindById(@PathVariable(name = "id", required = false) Long id, Model model) {
+    @GetMapping( "/register/find/{id}")
+    public String registerFindById(@PathVariable(name = "id") Long id, Model model) {
         //1.YOL
         /*Optional<RegisterEntity> findData = repository.findById(id);
         if (findData.isPresent()) {
@@ -126,7 +126,7 @@ public class RegisterController {
         //2.YOL
         RegisterEntity registerEntity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id + " nolu kayıt yoktur"));
         model.addAttribute("register_find", registerEntity);
-        return "register_list";
+        return "register_detail_page";
     }
 
     // DELETE
@@ -145,20 +145,20 @@ public class RegisterController {
 
     //UPDATE
     // http://localhost:8080/update/register
-    @GetMapping("/update/register/{id}")
-    public String validationGetRegister(@PathVariable(name = "id") Long id, Model model) {
+    @GetMapping("/register/update/{id}")
+    public String updateGetRegister(@PathVariable(name = "id") Long id, Model model) {
         RegisterEntity registerEntityFind = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id + " nolu kayıt yoktur"));
         if (registerEntityFind != null) {
             model.addAttribute("key_update", registerEntityFind);
         } else
             model.addAttribute("key_update", id + " numaralı veri yoktur");
-        return "register_create";
+        return "register_update";
     }
 
     //UPDATE
     // http://localhost:8080/update/register
-    @PostMapping("/update/register/{id}")
-    public String validationPostRegister(@PathVariable(name = "id") Long id, @Valid @ModelAttribute("key_update") RegisterDto registerDto, BindingResult bindingResult) {
+    @PostMapping("/register/update/{id}")
+    public String updatePostRegister(@PathVariable(name = "id") Long id, @Valid @ModelAttribute("key_update") RegisterDto registerDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             log.error("HATA: " + bindingResult);
             return "register_update";
