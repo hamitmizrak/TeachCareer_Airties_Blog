@@ -95,8 +95,13 @@ public class RegisterController implements IRegisterController {
     // http://localhost:8080/update/register
     @PostMapping("/register/update/{id}")
     @Override
-    public String updatePostRegister(@PathVariable(name = "id") Long id, @Valid @ModelAttribute("key_update") RegisterDto registerDto, BindingResult bindingResult, Model model) {
-        services.updatePostRegister(id, registerDto,  bindingResult,  model);
+    public String updatePostRegister(@PathVariable(name = "id") Long id,RegisterDto registerDto, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            log.error("HATA: " + bindingResult);
+            return "register_update";
+        }
+        services.updatePostRegister(id, registerDto);
+        model.addAttribute("rename","kalem");
         return "redirect:/register/list";
     }
 }

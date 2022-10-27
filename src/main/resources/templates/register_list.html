@@ -47,6 +47,13 @@
     <strong th:text="${register_success}"></strong>
 </div>
 
+
+<div class="alert alert-primary alert-dismissible fade show" role="alert">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <strong th:text="${rename}"></strong>
+</div>
+
+
 <a th:href="@{/register/create}" class="btn btn-primary">EKLE</a>
 <a th:href="@{/speedData}" class="btn btn-danger">Speed Data</a>
 <br><br>

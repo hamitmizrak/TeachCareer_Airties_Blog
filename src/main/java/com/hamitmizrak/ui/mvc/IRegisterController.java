@@ -11,5 +11,5 @@ public interface IRegisterController {
     public String registerFindById(Long id, Model model);
     public String registerDeleteById( Long id, Model model);
     public String updateGetRegister(Long id, Model model);
-    public String updatePostRegister(Long id,RegisterDto registerDto,BindingResult bindingResult, Model model);
+    public String updatePostRegister(Long id,RegisterDto registerDto, BindingResult bindingResult, Model model);
     }

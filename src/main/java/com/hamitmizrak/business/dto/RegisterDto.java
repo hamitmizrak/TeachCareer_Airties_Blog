@@ -31,7 +31,7 @@ public class RegisterDto implements Serializable {
     private String email;
 
     @NotEmpty(message = "{blog.password.validation.constraints.NotNull.message}")
-    @Size(min=7,max = 12,message = "{blog.password.pattern.validation.constraints.NotNull.message}")
+    //@Size(min=7,max = 12,message = "{blog.password.pattern.validation.constraints.NotNull.message}")
     //@Pattern(regexp = "")
     private String password;
 

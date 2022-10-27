@@ -152,7 +152,6 @@ public class RegisterServicesImpl implements IRegisterServices {
 
     //UPDATE
     // http://localhost:8080/update/register
-    @GetMapping("/register/update/{id}")
     @Override
     public String updateGetRegister(@PathVariable(name = "id") Long id, Model model) {
         RegisterEntity registerEntityFind = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id + " nolu kayıt yoktur"));
@@ -164,23 +163,18 @@ public class RegisterServicesImpl implements IRegisterServices {
     }
 
     //UPDATE
-    // http://localhost:8080/update/register
-    @PostMapping("/register/update/{id}")
     @Override
-    public String updatePostRegister(@PathVariable(name = "id") Long id, @Valid @ModelAttribute("key_update") RegisterDto registerDto, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            log.error("HATA: " + bindingResult);
-            return "register_update";
-        }
+    public RegisterDto updatePostRegister(Long id, RegisterDto registerDto) {
         RegisterEntity registerEntity = modelMapperBean.modelMapperMethod().map(registerDto, RegisterEntity.class);
         try {
             if (registerEntity != null) {
                 repository.save(registerEntity);
+                //model.addAttribute("key_update", "Güncelleme tamam");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "redirect:/register/list";
+        return registerDto;
     }
 
 }
