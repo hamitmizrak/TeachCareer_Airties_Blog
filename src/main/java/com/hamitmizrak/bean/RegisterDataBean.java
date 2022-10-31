@@ -1,17 +1,9 @@
 package com.hamitmizrak.bean;
 
-import com.hamitmizrak.business.dto.RegisterDto;
-import com.hamitmizrak.business.iservices.IRegisterServices;
-import com.hamitmizrak.data.entity.RegisterEntity;
-import com.hamitmizrak.data.repository.IRegisterRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
-import java.util.Date;
-import java.util.UUID;
+public class RegisterDataBean{}
 
+/*
 @RequiredArgsConstructor
 @Configuration
 public class RegisterDataBean {
@@ -36,3 +28,4 @@ public class RegisterDataBean {
         };
     }
 }
+*/
