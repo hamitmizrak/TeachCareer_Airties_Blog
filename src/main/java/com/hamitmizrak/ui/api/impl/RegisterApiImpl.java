@@ -8,6 +8,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,12 +25,11 @@ public class RegisterApiImpl implements IRegisterApi {
     //injection services
     private final IRegisterServices services;
 
-
     //http://localhost:8080/api/reg/v1/register/create
     //CREATE
     @Override
     @PostMapping("register/create")
-    public ResponseEntity<?>  createRegister(@RequestBody RegisterDto registerDto) {
+    public ResponseEntity<?>  createRegister(@Valid @RequestBody RegisterDto registerDto) {
         services.createRegister(registerDto);
         return ResponseEntity.ok(registerDto);
     }
@@ -68,7 +68,7 @@ public class RegisterApiImpl implements IRegisterApi {
     //UPDATE
     @Override
     @PutMapping("register/update/{id}")
-    public ResponseEntity<RegisterDto>  updateRegister(@PathVariable(name = "id") Long id, @RequestBody RegisterDto registerDto) {
+    public ResponseEntity<RegisterDto>  updateRegister(@PathVariable(name = "id") Long id, @Valid @RequestBody RegisterDto registerDto) {
         services.updateRegister(id,registerDto);
         return ResponseEntity.ok(registerDto);
     }

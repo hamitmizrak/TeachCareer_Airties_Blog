@@ -45,8 +45,7 @@ public class RegisterServicesImpl implements IRegisterServices {
 
     //CREATE
     @Override
-    @PostMapping("/services/register/create")
-    public RegisterDto createRegister(@RequestBody RegisterDto registerDto) {
+    public RegisterDto createRegister(RegisterDto registerDto) {
         registerDto.setPassword(passwordEncoderBean.passwordEncoderMethod().encode(registerDto.getPassword()));
         RegisterEntity registerEntity = dtoToEntity(registerDto);
         repository.save(registerEntity);
@@ -55,7 +54,6 @@ public class RegisterServicesImpl implements IRegisterServices {
 
     //LIST
     @Override
-    @GetMapping("/services/register/list")
     public List<RegisterDto> listRegister() {
         List<RegisterEntity> registerEntityList = repository.findAll();
         List<RegisterDto> dtoList = new ArrayList<>();
@@ -68,8 +66,7 @@ public class RegisterServicesImpl implements IRegisterServices {
 
     //FIND
     @Override
-    @GetMapping("/services/register/find/{id}")
-    public RegisterDto findRegister(@PathVariable(name = "id") Long id) {
+    public RegisterDto findRegister(Long id) {
         RegisterEntity registerEntity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id + " id bulunamadı"));
         RegisterDto entityToDto = entityToDto(registerEntity);
         return entityToDto;
@@ -77,8 +74,7 @@ public class RegisterServicesImpl implements IRegisterServices {
 
     //DELETE
     @Override
-    @DeleteMapping("/services/register/delete/{id}")
-    public Map<String, Boolean> deleteRegister(@PathVariable(name = "id") Long id) {
+    public Map<String, Boolean> deleteRegister(Long id) {
         RegisterEntity registerEntity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id + " id bulunamadı"));
         repository.delete(registerEntity);
         Map<String, Boolean> response = new HashMap<>();
@@ -89,8 +85,7 @@ public class RegisterServicesImpl implements IRegisterServices {
 
     //UPDATE
     @Override
-    @PutMapping("/services/register/update/{id}")
-    public RegisterDto updateRegister(@PathVariable(name = "id") Long id, @RequestBody RegisterDto registerDto) {
+    public RegisterDto updateRegister(Long id, RegisterDto registerDto) {
         RegisterEntity registerEntity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id + " id bulunamadı"));
         if (registerEntity != null) {
             registerEntity.setName(registerEntity.getName());
