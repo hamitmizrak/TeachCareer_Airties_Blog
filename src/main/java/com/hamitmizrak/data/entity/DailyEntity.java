@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
 //lombok
 @Data
@@ -18,12 +17,12 @@ import java.util.Date;
 //Entity
 @Entity
 @Table(name = "register")
-public class RegisterEntity extends BaseEntity implements Serializable {
+public class DailyEntity extends BaseEntity implements Serializable {
 public static final long serialVersionUID=1L;
 
    //field
-    private String name;
-    private String surname;
+    private String dailyHeader;
+    private String dailyContent;
 
     //@Column(name = "email",length = 125,nullable = false,unique = true)
     private String email;

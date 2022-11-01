@@ -16,21 +16,22 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 @Builder
-public class RegisterDto implements Serializable {
+public class DailyDto implements Serializable {
 
     private Long id;
-    @NotEmpty(message = "{blog.username.validation.constraints.NotNull.message}")
-    private String name;
 
-    @NotEmpty(message = "{blog.surname.validation.constraints.NotNull.message}")
-    private String surname;
+    @NotEmpty(message = "{daily.header.validation.constraints.NotNull.message}")
+    private String dailyHeader;
 
-    @NotEmpty(message = "{blog.email.validation.constraints.NotNull.message}")
-    @Email(message = "{blog.email.regex.validation.constraints.NotNull.message}")
+    @NotEmpty(message = "{daily.content.validation.constraints.NotNull.message}")
+    private String dailyContent;
+
+    @NotEmpty(message = "{daily.email.validation.constraints.NotNull.message}")
+    @Email(message = "{daily.email.regex.validation.constraints.NotNull.message}")
     @UserRegisterUniqueEmail
     private String email;
 
-    @NotEmpty(message = "{blog.password.validation.constraints.NotNull.message}")
+    @NotEmpty(message = "{daily.password.validation.constraints.NotNull.message}")
     //@Size(min=7,max = 12,message = "{blog.password.pattern.validation.constraints.NotNull.message}")
     //@Pattern(regexp = "")
     private String password;

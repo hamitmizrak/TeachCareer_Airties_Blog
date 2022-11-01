@@ -1,7 +1,7 @@
 package com.hamitmizrak.bean;
 
 
-public class RegisterDataBean{}
+public class DailyDataBean {}
 
 /*
 @RequiredArgsConstructor
