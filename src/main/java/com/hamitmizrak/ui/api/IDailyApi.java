@@ -14,9 +14,10 @@ public interface IDailyApi {
     //FIND
     ResponseEntity<DailyDto> findDaily(Long id);
 
-    //DELETE
-    ResponseEntity <Map<String, Boolean>> deleteDaily( Long id);
 
     //UPDATE
     ResponseEntity<DailyDto>  updateDaily(Long id, DailyDto registerDto);
+
+    //DELETE
+    ResponseEntity <Map<String, Boolean>> deleteDaily( Long id);
 }
