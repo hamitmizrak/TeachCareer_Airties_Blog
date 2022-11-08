@@ -40,11 +40,11 @@
 </head>
 
 <body class="container">
-<h1>Listem</h1>
+<h1>Günlük</h1>
 
 <div class="alert alert-primary alert-dismissible fade show" role="alert">
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    <strong th:text="${register_success}"></strong>
+    <strong th:text="${daily_success}"></strong>
 </div>
 
 
@@ -54,38 +54,39 @@
 </div>
 
 
-<a th:href="@{/register/create}" class="btn btn-primary">EKLE</a>
-<a th:href="@{/speedData}" class="btn btn-danger">Speed Data</a>
+<a th:href="@{/daily/create}" class="btn btn-primary">EKLE</a>
+<a th:href="@{/speedData}" class="btn btn-secondary">Hızlı Ekle</a>
+<a th:href="@{/speedDelete}" class="btn btn-danger">Bütün veriyi sil</a>
 <br><br>
 <table class="table table-hover table-striped" id="datalistregisterTable">
     <thead>
     <tr>
-        <th class="text-uppercase" th:text="#{blog.register.id}"></th>
-        <th class="text-uppercase" th:text="#{blog.register.name}"></th>
-        <th class="text-uppercase" th:text="#{blog.register.surname}"></th>
-        <th class="text-uppercase" th:text="#{blog.register.password}"></th>
-        <th class="text-uppercase" th:text="#{blog.register.email}"></th>
-        <th class="text-uppercase" th:text="#{blog.register.date}"></th>
-        <th class="text-uppercase" th:text="#{blog.register.update}"></th>
-        <th class="text-uppercase" th:text="#{blog.register.show}"></th>
-        <th class="text-uppercase" th:text="#{blog.register.delete}"></th>
+        <th class="text-uppercase" th:text="#{daily.id}"></th>
+        <th class="text-uppercase" th:text="#{daily.header}"></th>
+        <th class="text-uppercase" th:text="#{daily.content}"></th>
+        <th class="text-uppercase" th:text="#{daily.email}"></th>
+        <th class="text-uppercase" th:text="#{daily.password}"></th>
+        <th class="text-uppercase" th:text="#{daily.date}"></th>
+        <th class="text-uppercase" th:text="#{daily.update}"></th>
+        <th class="text-uppercase" th:text="#{daily.show}"></th>
+        <th class="text-uppercase" th:text="#{daily.delete}"></th>
     </tr>
     </thead>
     <tbody>
-    <tr th:if="${register.id>0}" th:each="register:${register_list}">
-        <td th:text="${register.id}"></td>
-        <td th:text="${register.name}"></td>
-        <td th:text="${register.surname}"></td>
-        <td th:text="${register.email}"></td>
-        <td th:text="${register.password}"></td>
-        <td th:text="${register.createdDate}"></td>
-        <td><a class="btn btn-primary" th:href="@{/register/update/{id}(id=${register.id})}"> <i
+    <tr th:if="${daily.id>0}" th:each="daily:${key_daily}">
+        <td th:text="${daily.id}"></td>
+        <td th:text="${daily.dailyHeader}"></td>
+        <td th:text="${daily.dailyContent}"></td>
+        <td th:text="${daily.email}"></td>
+        <td th:text="${daily.password}"></td>
+        <td th:text="${daily.createdDate}"></td>
+        <td><a class="btn btn-primary" th:href="@{/daily/update/{id}(id=${daily.id})}"> <i
                 class="fa-solid fa-wrench"></i> </a></td>
-        <td><a class="btn btn-success" th:href="@{/register/find/{id}(id=${register.id})}"><i
+        <td><a class="btn btn-success" th:href="@{/daily/find/{id}(id=${daily.id})}"><i
                 class="fa-solid fa-eye btn-sm"></i> </a></td>
-        <!-- <td><a th:href="@{/register/delete/{id}(id=${register.id})}" th:onclick="if(!(confirm('silmek istiyor musunuz ?'))) return false" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a></td>-->
+        <!-- <td><a th:href="@{/daily/delete/{id}(id=${register.id})}" th:onclick="if(!(confirm('silmek istiyor musunuz ?'))) return false" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a></td>-->
         <td><a class="btn btn-danger"
-               th:onclick="'deleteSweetAlertRegister(\'/register/delete/' + ${register.id} +'\')'">
+               th:onclick="'deleteSweetAlertRegister(\'/daily/delete/' + ${daily.id} +'\')'">
             <i class="fa-solid fa-trash-can"></i></a>
         </td>
     </tr>

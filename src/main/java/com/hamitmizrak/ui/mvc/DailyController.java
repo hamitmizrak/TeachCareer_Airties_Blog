@@ -35,24 +35,35 @@ public class DailyController {
     private final PasswordEncoderBean passwordEncoderBean;
 
     // SPEED DATA
-    // http://localhost:8080/speedData
+    // http://localhost:2222/speedData
     @GetMapping("/speedData")
     public String createSpeedData(Model model) {
         int counter = 0;
         for (int i = 1; i <= 5; i++) {
             UUID uuid = UUID.randomUUID();
             DailyEntity registerEntity = DailyEntity.builder()
-                    .dailyHeader("adı " + i)
-                    .dailyContent("root").email(uuid.toString().concat("@gmail.com")).build();
+                    .dailyHeader("başlık " + i).dailyContent("içerik "+i)
+                    .password("Hm1234"+i)
+                    .email(uuid.toString().concat("@gmail.com")).build();
             repository.save(registerEntity);
             counter++;
         }
         model.addAttribute("key_dataset", counter + " tane daily Entity oluşturuldu");
-        return "daily_list";
+        return "redirect:/daily/list";
     }
 
+    // SPEED DELETE
+    // http://localhost:2222/speedData
+    @GetMapping("/speedDelete")
+    public String deleteSpeedData(Model model) {
+        repository.deleteAll();
+        return "redirect:/daily/list";
+    }
+
+
+
     // CREATE 2497-2588
-    // http://localhost:8080/daily/create
+    // http://localhost:2222/daily/create
     @GetMapping("/daily/create")
     public String validationGetDaily(Model model) {
         model.addAttribute("key_daily", new DailyDto());
@@ -60,9 +71,9 @@ public class DailyController {
     }
 
     //CREATE
-    // http://localhost:8080/daily/create
+    // http://localhost:1111/daily/create
     @PostMapping("/daily/create")
-    public String validationPostDaily(@Valid @ModelAttribute("key_dailyr") DailyDto dailyDto, BindingResult bindingResult, Model model) {
+    public String validationPostDaily(@Valid @ModelAttribute("key_daily") DailyDto dailyDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             log.error("HATA: " + bindingResult);
             return "daily_create";
@@ -97,11 +108,11 @@ public class DailyController {
 
 
     // LIST
-    // http://localhost:8080/daily/list
+    // http://localhost:2222/daily/list
     @GetMapping("/daily/list")
     public String dailyList(Model model) {
         List<DailyEntity> list = repository.findAll();
-        model.addAttribute("daily_list", list);
+        model.addAttribute("key_daily", list);
         list.forEach((temp) -> {
             System.out.println(temp);
         });
@@ -109,8 +120,8 @@ public class DailyController {
     }
 
     // FIND
-    // http://localhost:8080/daily/find
-    // http://localhost:8080/daily/find/1
+    // http://localhost:2222/daily/find
+    // http://localhost:2222/daily/find/1
     @GetMapping( "/daily/find/{id}")
     public String dailyFindById(@PathVariable(name = "id") Long id, Model model) {
         //1.YOL
@@ -128,8 +139,8 @@ public class DailyController {
     }
 
     // DELETE
-    // http://localhost:8080/daily/delete
-    // http://localhost:8080/daily/delete/1
+    // http://localhost:2222/daily/delete
+    // http://localhost:2222/daily/delete/1
     @GetMapping({"/daily/delete", "/daily/delete/{id}"})
     public String dailyDeleteById(@PathVariable(name = "id", required = false) Long id, Model model) {
         DailyEntity registerEntity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id + " nolu kayıt yoktur"));
@@ -142,7 +153,7 @@ public class DailyController {
     }
 
     //UPDATE
-    // http://localhost:8080/update/daily
+    // http://localhost:2222/update/daily
     @GetMapping("/daily/update/{id}")
     public String updateGetDaily(@PathVariable(name = "id") Long id, Model model) {
         DailyEntity registerEntityFind = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id + " nolu kayıt yoktur"));
@@ -154,7 +165,7 @@ public class DailyController {
     }
 
     //UPDATE
-    // http://localhost:8080/update/daily
+    // http://localhost:2222/update/daily
     @PostMapping("/daily/update/{id}")
     public String updatePostDaily(@PathVariable(name = "id") Long id, @Valid @ModelAttribute("key_update") DailyDto dailyDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
