@@ -16,7 +16,7 @@ import java.io.Serializable;
 
 //Entity
 @Entity
-@Table(name = "register")
+@Table(name = "daily")
 public class DailyEntity extends BaseEntity implements Serializable {
 public static final long serialVersionUID=1L;
 

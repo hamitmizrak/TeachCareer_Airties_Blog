@@ -37,4 +37,12 @@ public class DailyDto implements Serializable {
     private String password;
 
     private Date createdDate;
+
+
+/*    {
+        "timestamp": "Nov 7, 2022, 9:05:22 PM",
+            "status": 403,
+            "error": "Forbidden",
+            "path": "/gateway/daily"
+    }*/
 }

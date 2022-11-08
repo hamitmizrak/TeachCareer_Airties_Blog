@@ -33,22 +33,22 @@ public class DailyServicesImpl implements IDailyServices {
 
     // Model Mapper
     @Override
-    public DailyDto entityToDto(DailyEntity registerEntity) {
-        return modelMapperBean.modelMapperMethod().map(registerEntity, DailyDto.class);
+    public DailyDto entityToDto(DailyEntity dailyEntity) {
+        return modelMapperBean.modelMapperMethod().map(dailyEntity, DailyDto.class);
     }
 
     @Override
-    public DailyEntity dtoToEntity(DailyDto registerDto) {
-        return modelMapperBean.modelMapperMethod().map(registerDto, DailyEntity.class);
+    public DailyEntity dtoToEntity(DailyDto dailyDto) {
+        return modelMapperBean.modelMapperMethod().map(dailyDto, DailyEntity.class);
     }
 
     //CREATE
     @Override
-    public DailyDto createDaily(DailyDto registerDto) {
-        registerDto.setPassword(passwordEncoderBean.passwordEncoderMethod().encode(registerDto.getPassword()));
-        DailyEntity registerEntity = dtoToEntity(registerDto);
+    public DailyDto createDaily(DailyDto dailyDto) {
+        dailyDto.setPassword(passwordEncoderBean.passwordEncoderMethod().encode(dailyDto.getPassword()));
+        DailyEntity registerEntity = dtoToEntity(dailyDto);
         repository.save(registerEntity);
-        return registerDto;
+        return dailyDto;
     }
 
     //LIST
@@ -84,15 +84,15 @@ public class DailyServicesImpl implements IDailyServices {
 
     //UPDATE
     @Override
-    public DailyDto updateDaily(Long id, DailyDto registerDto) {
+    public DailyDto updateDaily(Long id, DailyDto dailyDto) {
         DailyEntity registerEntity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id + " id bulunamadı"));
         if (registerEntity != null) {
-            registerEntity.setDailyHeader(registerEntity.getDailyHeader());
-            registerEntity.setDailyContent(registerEntity.getDailyContent());
-            registerEntity.setEmail(registerEntity.getEmail());
-            registerEntity.setPassword(registerEntity.getPassword());
+            registerEntity.setDailyHeader(dailyDto.getDailyHeader());
+            registerEntity.setDailyContent(dailyDto.getDailyContent());
+            registerEntity.setEmail(dailyDto.getEmail());
+            registerEntity.setPassword(dailyDto.getPassword());
             repository.save(registerEntity);
         }
-        return registerDto;
+        return dailyDto;
     }
 }

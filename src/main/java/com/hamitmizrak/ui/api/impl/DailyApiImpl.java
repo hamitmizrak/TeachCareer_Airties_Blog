@@ -25,7 +25,7 @@ public class DailyApiImpl implements IDailyApi {
     //injection services
     private final IDailyServices services;
 
-    //http://localhost:8080/api/reg/v1/daily/create
+    //http://localhost:2222/api/reg/v1/daily/create
     //CREATE
     @Override
     @PostMapping("daily/create")
@@ -34,7 +34,7 @@ public class DailyApiImpl implements IDailyApi {
         return ResponseEntity.ok(dailyDto);
     }
 
-    //http://localhost:8080/api/reg/v1/daily/list
+    //http://localhost:2222/api/reg/v1/daily/list
     //LIST
     @Override
     @GetMapping("daily/list")
@@ -43,7 +43,7 @@ public class DailyApiImpl implements IDailyApi {
     }
 
 
-    //http://localhost:8080/api/reg/v1/daily/find/1
+    //http://localhost:2222/api/reg/v1/daily/find/1
     //FIND
     @Override
     @GetMapping("daily/find/{id}")
@@ -52,7 +52,7 @@ public class DailyApiImpl implements IDailyApi {
     }
 
 
-    //http://localhost:8080/api/reg/v1/daily/delete/1
+    //http://localhost:2222/api/reg/v1/daily/delete/1
     //DELETE
     @Override
     @DeleteMapping("daily/delete/{id}")
@@ -64,7 +64,7 @@ public class DailyApiImpl implements IDailyApi {
     }
 
 
-    //http://localhost:8080/api/reg/v1/daily/update/1
+    //http://localhost:2222/api/reg/v1/daily/update/1
     //UPDATE
     @Override
     @PutMapping("daily/update/{id}")
