@@ -58,8 +58,6 @@ Extensisons
 - jquery
 - Bootstrap
 - react
-
-
 ---
 
 ## BackEnd

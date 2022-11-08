@@ -1,4 +1,4 @@
-package com.hamitmizrak.ui.mvc;
+package com.hamitmizrak.ui.mvc.impl;
 
 import com.hamitmizrak.bean.ModelMapperBean;
 import com.hamitmizrak.bean.PasswordEncoderBean;
@@ -6,6 +6,7 @@ import com.hamitmizrak.business.dto.DailyDto;
 import com.hamitmizrak.data.entity.DailyEntity;
 import com.hamitmizrak.data.repository.IDailyRepository;
 import com.hamitmizrak.exception.ResourceNotFoundException;
+import com.hamitmizrak.ui.mvc.IDailyController;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
@@ -24,10 +25,8 @@ import java.util.UUID;
 //Controller
 @Controller
 //@RequestMapping("/controller")
-public class DailyController {
-    //thymeleaf CRUD
-    //@Service
-    //postman
+public class DailyController implements IDailyController {
+
 
     //Inject
     private final IDailyRepository repository;
@@ -36,6 +35,7 @@ public class DailyController {
 
     // SPEED DATA
     // http://localhost:2222/speedData
+    @Override
     @GetMapping("/speedData")
     public String createSpeedData(Model model) {
         int counter = 0;
@@ -54,6 +54,7 @@ public class DailyController {
 
     // SPEED DELETE
     // http://localhost:2222/speedData
+    @Override
     @GetMapping("/speedDelete")
     public String deleteSpeedData(Model model) {
         repository.deleteAll();
@@ -64,6 +65,7 @@ public class DailyController {
 
     // CREATE 2497-2588
     // http://localhost:2222/daily/create
+    @Override
     @GetMapping("/daily/create")
     public String validationGetDaily(Model model) {
         model.addAttribute("key_daily", new DailyDto());
@@ -72,6 +74,7 @@ public class DailyController {
 
     //CREATE
     // http://localhost:1111/daily/create
+    @Override
     @PostMapping("/daily/create")
     public String validationPostDaily(@Valid @ModelAttribute("key_daily") DailyDto dailyDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
@@ -109,6 +112,7 @@ public class DailyController {
 
     // LIST
     // http://localhost:2222/daily/list
+    @Override
     @GetMapping("/daily/list")
     public String dailyList(Model model) {
         List<DailyEntity> list = repository.findAll();
@@ -122,6 +126,7 @@ public class DailyController {
     // FIND
     // http://localhost:2222/daily/find
     // http://localhost:2222/daily/find/1
+    @Override
     @GetMapping( "/daily/find/{id}")
     public String dailyFindById(@PathVariable(name = "id") Long id, Model model) {
         //1.YOL
@@ -141,6 +146,7 @@ public class DailyController {
     // DELETE
     // http://localhost:2222/daily/delete
     // http://localhost:2222/daily/delete/1
+    @Override
     @GetMapping({"/daily/delete", "/daily/delete/{id}"})
     public String dailyDeleteById(@PathVariable(name = "id", required = false) Long id, Model model) {
         DailyEntity registerEntity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id + " nolu kayıt yoktur"));
@@ -154,6 +160,7 @@ public class DailyController {
 
     //UPDATE
     // http://localhost:2222/update/daily
+    @Override
     @GetMapping("/daily/update/{id}")
     public String updateGetDaily(@PathVariable(name = "id") Long id, Model model) {
         DailyEntity registerEntityFind = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id + " nolu kayıt yoktur"));
@@ -166,6 +173,7 @@ public class DailyController {
 
     //UPDATE
     // http://localhost:2222/update/daily
+    @Override
     @PostMapping("/daily/update/{id}")
     public String updatePostDaily(@PathVariable(name = "id") Long id, @Valid @ModelAttribute("key_update") DailyDto dailyDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
