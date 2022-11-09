@@ -98,6 +98,10 @@ Spring Boot Actuator
 ---
 
 ## Docker Deployment
+./mvnw clean package 
+./mvnw clean package -DskipsTests
+
+
 
 1.ADIM
 npx create-react-app frontend

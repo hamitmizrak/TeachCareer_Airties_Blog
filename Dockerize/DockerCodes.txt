@@ -1,0 +1,48 @@
+docker container --help
+docker search nginx
+docker pull nginx
+docker pull httpd
+
+##############################################
+docker container logs containerID
+docker container inspect containerID
+
+##############################################
+## IMAGE
+docker image ls
+docker image ls -a (çalışan çalışmayan bütün container göster)
+docker image rm imageID
+
+##############################################
+## CONTAİNER
+docker container run --publish 7777:80 nginx
+docker container run -p 7777:80 nginx
+docker container run -p 7777:80 --detach nginx
+docker container run -p 7777:80 -d nginx
+docker container run -p 7777:80 -d  --name merhabalar nginx
+docker container run -p 7777:80 -d  --name merhabalar nginx:latest
+docker container run -p 7777:80 -d  --name merhabalar nginx:1.14
+
+docker container stop vibrant_goldwasser
+docker container rm -f containerID
+
+# --rm: bu container kapattığımızda kendisi silinir.
+docker container run --rm -p 7777:80 -d nginx
+
+docker container logs containerID
+docker container logs -t 7ee939cc4fdd
+docker container logs -f 7ee939cc4fdd
+
+docker container prune
+-y
+
+curl localhost:7777
+
+# monitoring: tis
+docker container top containerID
+docker container inspect containerID
+docker container stats containerID
+
+
+docker container run -d -p 9696:80 --cpus="2" nginx
+docker container run --name deneme44 -d -p 9696:80 --memory=200m --memory-swap=400m --cpus="2"  nginx
