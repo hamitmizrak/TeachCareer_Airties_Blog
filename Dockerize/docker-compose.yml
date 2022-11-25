@@ -5,6 +5,6 @@ services:
     container_name: daily.jar
     image: daily.jar
     restart: always
-    build: ..
+    build: ./
     ports:
       - "2222:2222"    
