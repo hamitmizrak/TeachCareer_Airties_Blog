@@ -1,40 +1,28 @@
-# special data
-log
-memory_persist
-frontend/node_modules
-
-
-
-HELP.md
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
-
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### VS Code ###
-.vscode/
+<!-- start codes -->
+<h1>Register</h1>
+<button class="btn btn-danger btn-sm">Hızlı ekle</button>
+<button th:text="#{register.adduser}" class="btn btn-primary btn-sm">Kullanıcı ekle</button>
+<table class="table table-hover table-striped"   id="datalistcompanyTable">
+    <tr>
+        <th th:text="#{register.id}"></th>
+        <th th:text="#{register.name}"></th>
+        <th th:text="#{register.surname}"></th>
+        <th th:text="#{register.email}"></th>
+        <th th:text="#{register.password}"></th>
+        <th th:text="#{register.created_date}"></th>
+        <th th:text="#{register.update}"></th>
+        <th th:text="#{register.show}"></th>
+        <th th:text="#{register.delete}"></th>
+    </tr>
+    <tr th:each="register:${key_thymeleaf5}">
+        <td th:text="${register.id}"></td>
+        <td th:text="${register.name}"></td>
+        <td th:text="${register.surname}"></td>
+        <td th:text="${register.emailAddress}"></td>
+        <td th:text="${register.password}"></td>
+        <td th:text="${register.createdDate}"></td>
+        <td><i class="fa-solid fa-wrench text-primary"></i></td>
+        <td><i class="fa-solid fa-wifi text-warning"></i></td>
+        <td><i class="fa-solid fa-trash text-danger"></i></td>
+    </tr>
+</table>
