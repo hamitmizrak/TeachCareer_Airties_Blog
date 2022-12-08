@@ -1,0 +1,21 @@
+1.YOL: Dockerfile - container
+docker pull mysql:5.7
+docker build -t backend .
+docker images
+docker network ls
+docker run --name mysqldb --network springmysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=daily_database -e MYSQL_USER=root -e MYSQL_PASSWORD=root -d mysql:5.7
+docker logs -f mysqldb
+
+- docker exec -it mysqldb bash
+- mysql -u root -p root
+- show databases;
+
+docker run --network springmysql --name backend-container -p 2222:2222 -d backend
+docker ps
+
+docker logs -f backend-container
+
+POSTMAN
+
+
+2.YOL: Dockerfile -DockerCompose
