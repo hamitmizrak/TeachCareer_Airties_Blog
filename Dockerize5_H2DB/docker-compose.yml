@@ -1,0 +1,19 @@
+version: '3.1'
+
+services:
+  app:
+    container_name: daily
+    image: daily
+    restart: always
+    build: ./
+    ports:
+      - "2222:2222"
+
+    networks:
+      - daily_default
+
+networks:
+  daily_default:
+    name: daily
+    driver: bridge
+

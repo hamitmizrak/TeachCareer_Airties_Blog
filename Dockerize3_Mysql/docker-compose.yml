@@ -1,0 +1,40 @@
+#restart: unless-stopped
+#restart: always
+
+version: '3.1'
+
+services:
+  app:
+    container_name: daily.jar
+    image: daily.jar
+    restart: always
+    build: ./
+    ports:
+      - "2222:2222"
+    environment:
+      - spring.datasource.url=jdbc:mysql://mysqldb:3306/daily_database?useSSL=false&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true
+    networks:
+      - springmysql
+    depends_on:
+      - mysqldb
+
+  mysqldb:
+    image: mysql:8.0
+    ports:
+      - 3306:3306
+    expose:
+      - "3306"
+
+    networks:
+      - springmysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=12345
+      - MYSQL_DATABASE=daily_database
+      - MYSQL_USER=hamit
+      - MYSQL_PASSWORD=12345
+    restart: unless-stopped
+
+networks:
+  springmysql:
+    name: springmysql
+    driver: bridge
